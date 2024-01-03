@@ -9,6 +9,7 @@ const LocationSelector = () => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
 
   useEffect(() => {
     fetch("https://crio-location-selector.onrender.com/countries")
@@ -20,6 +21,7 @@ const LocationSelector = () => {
   const handleCountryChange = (e) => {
     const countryName = e.target.value;
     setSelectedCountry(countryName);
+    setSelectedLocation("");
 
     fetch(
       `https://crio-location-selector.onrender.com/country=${countryName}/states`
@@ -32,12 +34,22 @@ const LocationSelector = () => {
   const handleStateChange = (e) => {
     const stateName = e.target.value;
     setSelectedState(stateName);
+    setSelectedLocation("");
+
     fetch(
       `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${stateName}/cities`
     )
       .then((response) => response.json())
       .then((data) => setCities(data))
       .catch((error) => console.error("Error fetching cities:", error));
+  };
+
+  const handleCityChange = (e) => {
+    const cityName = e.target.value;
+    setSelectedCity(cityName);
+    setSelectedLocation(
+      `You Selected ${cityName}, ${selectedState}, ${selectedCountry}`
+    );
   };
 
   return (
@@ -67,11 +79,7 @@ const LocationSelector = () => {
       </select>
 
       <label htmlFor="cities">Select City:</label>
-      <select
-        id="cities"
-        value={selectedCity}
-        onChange={(e) => setSelectedCity(e.target.value)}
-      >
+      <select id="cities" onChange={handleCityChange} value={selectedCity}>
         <option value="">-- Select City --</option>
         {cities.map((city) => (
           <option key={city} value={city}>
@@ -79,6 +87,8 @@ const LocationSelector = () => {
           </option>
         ))}
       </select>
+
+      {selectedLocation && <p>{selectedLocation}</p>}
     </div>
   );
 };
