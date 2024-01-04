@@ -48,10 +48,14 @@ const LocationSelector = () => {
     const cityName = e.target.value;
     setSelectedCity(cityName);
     setSelectedLocation(
-      `You Selected ${cityName}, ${selectedState}, ${selectedCountry}`
+      <p>
+        <span className="selected-text"> You Selected </span>
+        <span className="city">{cityName},</span>
+        <span className="state"> {selectedState}, </span>
+        <span className="country"> {selectedCountry} </span>
+      </p>
     );
   };
-
   return (
     <div>
       <label htmlFor="countries">Select Country:</label>
