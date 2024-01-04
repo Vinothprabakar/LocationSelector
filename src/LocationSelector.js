@@ -52,7 +52,7 @@ const LocationSelector = () => {
     setSelectedCity(cityName);
     setSelectedLocation(
       <p>
-        <span className="selected-text"> You Selected </span>
+        <span className="selected-text"> You selected </span>
         <span className="city">{cityName},</span>
         <span className="state"> {selectedState}, </span>
         <span className="country"> {selectedCountry} </span>
