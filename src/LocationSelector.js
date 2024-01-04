@@ -61,7 +61,6 @@ const LocationSelector = () => {
   };
   return (
     <div>
-      <label htmlFor="countries">Select Country:</label>
       <select
         id="countries"
         onChange={handleCountryChange}
@@ -75,7 +74,6 @@ const LocationSelector = () => {
         ))}
       </select>
 
-      <label htmlFor="states">Select State:</label>
       <select id="states" onChange={handleStateChange} value={selectedState}>
         <option value="">-- Select State --</option>
         {states.map((state) => (
@@ -85,7 +83,6 @@ const LocationSelector = () => {
         ))}
       </select>
 
-      <label htmlFor="cities">Select City:</label>
       <select id="cities" onChange={handleCityChange} value={selectedCity}>
         <option value="">-- Select City --</option>
         {cities.map((city) => (
