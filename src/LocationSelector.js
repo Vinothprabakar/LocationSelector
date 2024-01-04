@@ -21,6 +21,8 @@ const LocationSelector = () => {
   const handleCountryChange = (e) => {
     const countryName = e.target.value;
     setSelectedCountry(countryName);
+    setSelectedState("");
+    setSelectedCity("");
     setSelectedLocation("");
 
     fetch(
@@ -34,6 +36,7 @@ const LocationSelector = () => {
   const handleStateChange = (e) => {
     const stateName = e.target.value;
     setSelectedState(stateName);
+    setSelectedCity("");
     setSelectedLocation("");
 
     fetch(
@@ -50,7 +53,7 @@ const LocationSelector = () => {
     setSelectedLocation(
       <p>
         <span className="selected-text"> You Selected </span>
-        <span className="city">{selectedCity},</span>
+        <span className="city">{cityName},</span>
         <span className="state"> {selectedState}, </span>
         <span className="country"> {selectedCountry} </span>
       </p>
@@ -92,7 +95,9 @@ const LocationSelector = () => {
         ))}
       </select>
 
-      {selectedLocation && <p>{selectedLocation}</p>}
+      {selectedLocation && (
+        <p data-testid="selected-location">{selectedLocation}</p>
+      )}
     </div>
   );
 };
